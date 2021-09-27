@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SelfContained>true</SelfContained>
+    <NativeLib>Shared</NativeLib>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultRuntimeIdentifier Condition="'$(DefaultRuntimeIdentifier)' == ''">win-x64</DefaultRuntimeIdentifier>
+    <DefaultRuntimeIdentifier Condition="$([MSBuild]::IsOSPlatform('Linux'))">linux-x64</DefaultRuntimeIdentifier>
+    <DefaultRuntimeIdentifier Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx-x64</DefaultRuntimeIdentifier>
+    <DefaultRuntimeIdentifier Condition="$([MSBuild]::IsOSPlatform('Windows'))">win-x64</DefaultRuntimeIdentifier>
+
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">$(DefaultRuntimeIdentifier)</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-alpha.1.21472.3"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsNApiRepo)' != 'true'">
+    <PackageReference Include="NApi" Version="1.0.0-beta5"/>
+    <PackageReference Include="NApi.SourceGenerators.AOT" Version="1.0.0-beta5"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsNApiRepo)' == 'true'">
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\..\NApi\NApi.csproj"/>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\..\NApi.SourceGenerators.AOT\NApi.SourceGenerators.AOT.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+  </ItemGroup>
+
+</Project>

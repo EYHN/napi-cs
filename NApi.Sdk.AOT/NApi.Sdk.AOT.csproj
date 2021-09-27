@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\Packaging.props"/>
+
+	<PropertyGroup Label="Build">
+		<TargetFramework>net6.0</TargetFramework>
+		<PackageOnlyBuild>true</PackageOnlyBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeBuildOutput>false</IncludeBuildOutput> 
+	</PropertyGroup>
+
+	<PropertyGroup Label="PackageInfo">
+		<Title>MSBuild Sdk for .NET</Title>
+		<PackageType>MSBuildSdk</PackageType>
+		<PackageTags>nodejs;msbuild</PackageTags>
+		<Summary>An MSBuild SDK package.</Summary>
+		<Description>An MSBuild SDK package.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+    <None Include="Sdk\**\*" Pack="true" PackagePath="Sdk" Visible="false" />
+  </ItemGroup>
+
+</Project>

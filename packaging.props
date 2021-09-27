@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="PackageInfo">
+		<Authors>EYHN</Authors>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageProjectUrl>https://github.com/EYHN/napi-cs</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/EYHN/napi-cs/blob/master/LICENSE.md</PackageLicenseUrl>
+		<PackageReleaseNotes>https://github.com/EYHN/napi-cs/blob/master/README.md</PackageReleaseNotes>
+		<PackageVersion>1.0.0-beta5</PackageVersion>
+	</PropertyGroup>
+</Project>

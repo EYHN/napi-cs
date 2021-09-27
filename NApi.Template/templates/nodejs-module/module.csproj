@@ -1,0 +1,6 @@
+<Project Sdk="NApi.Sdk.AOT/1.0.0-beta5">
+  <PropertyGroup>
+      <TargetFramework>net6.0</TargetFramework>
+      <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\Packaging.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup Label="PackageInfo">
+		<Title>NApi</Title>
+		<PackageType>MSBuildSdk</PackageType>
+		<PackageTags>nodejs</PackageTags>
+		<Summary>NodeJS Addon Api for dotnet.</Summary>
+		<Description>NodeJS Addon Api for dotnet.</Description>
+	</PropertyGroup>
+
+</Project>

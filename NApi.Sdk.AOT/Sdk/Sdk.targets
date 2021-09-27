@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  
+  <Target Name="CallPublish" AfterTargets="AfterBuild">
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish"/>
+  </Target>
+
+  <Target Name="NodeAddon" AfterTargets="LinkNative">
+    <Delete Files="$(NativeOutputPath)$(TargetName).node" />
+    <Copy
+      SourceFiles="$(NativeOutputPath)$(TargetName)$(NativeBinaryExt)"
+      DestinationFiles="$(NativeOutputPath)$(TargetName).node"
+    />
+  </Target>
+
+  <Target Name="PublishNodeAddon" AfterTargets="CopyNativeBinary">
+    <Delete Files="$(PublishDir)\$(TargetName).node" />
+    <Copy
+      SourceFiles="$(PublishDir)\$(TargetName)$(NativeBinaryExt)"
+      DestinationFiles="$(PublishDir)\$(TargetName).node"
+    />
+  </Target>
+
+</Project>

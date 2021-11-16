@@ -3,7 +3,7 @@
 		<Authors>EYHN</Authors>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<PackageProjectUrl>https://github.com/EYHN/napi-cs</PackageProjectUrl>
-		<PackageLicenseUrl>https://github.com/EYHN/napi-cs/blob/master/LICENSE.md</PackageLicenseUrl>
+		<PackageLicense>MIT</PackageLicense>
 		<PackageReleaseNotes>https://github.com/EYHN/napi-cs/blob/master/README.md</PackageReleaseNotes>
 		<PackageVersion>1.0.0-beta5</PackageVersion>
 	</PropertyGroup>

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\Packaging.props"/>
+  <Import Project="..\packaging.sdk.props"/>
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
@@ -8,15 +8,10 @@
     <Description>Templates for developing nodejs modules with dotnet.</Description>
     <PackageTags>dotnet-new;templates;nodejs;napi</PackageTags>
     <TargetFramework>net6.0</TargetFramework>
-
-    <IncludeContentInPack>true</IncludeContentInPack>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>content</ContentTargetFolders>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" Pack="true" PackagePath="content\templates" />
     <Compile Remove="**\*" />
   </ItemGroup>
-
 </Project>

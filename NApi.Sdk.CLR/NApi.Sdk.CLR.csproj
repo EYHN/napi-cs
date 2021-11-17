@@ -7,12 +7,21 @@
 		<PackageType>MSBuildSdk</PackageType>
 		<PackageTags>nodejs;msbuild</PackageTags>
 		<Summary>An MSBuild SDK package.</Summary>
-		<TargetFramework>net6.0</TargetFramework>
 		<Description>An MSBuild SDK package.</Description>
+		<TargetFramework>net6.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
     <Content Include="Sdk\**\*" Pack="true" PackagePath="Sdk" Visible="false" />
   </ItemGroup>
+
+	<Target Name="GenerateHeaders" BeforeTargets="BeforeBuild">
+    <Exec Command="npm i"
+          WorkingDirectory="$(MSBuildThisFileDirectory)"
+          ConsoleToMsBuild="true" />
+		<ItemGroup>
+			<Content Include="Build\**\*" Pack="true" PackagePath="Build" Visible="false" />
+		</ItemGroup>
+  </Target>
 
 </Project>

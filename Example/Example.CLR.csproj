@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup>
+    <IsNApiRepo>true</IsNApiRepo>
+  </PropertyGroup>
+
+  <Import Project="../NApi.Sdk.CLR/Sdk/Sdk.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <BaseOutputPath>bin/clr/</BaseOutputPath>
+  </PropertyGroup>
+
+  <Import Project="../NApi.Sdk.CLR/Sdk/Sdk.targets" />
+</Project>

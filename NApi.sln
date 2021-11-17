@@ -7,11 +7,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NApi", "Napi\NApi.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NApi.Sdk.AOT", "NApi.Sdk.AOT\NApi.Sdk.AOT.csproj", "{F4CA3A5A-6568-41C7-9BB8-9B4FB88848CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NApi.SourceGenerators.AOT", "NApi.SourceGenerators.AOT\NApi.SourceGenerators.AOT.csproj", "{9E192FD1-6BE2-4C32-A1F0-BC2A45F312E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NApi.SourceGenerators", "NApi.SourceGenerators\NApi.SourceGenerators.csproj", "{9E192FD1-6BE2-4C32-A1F0-BC2A45F312E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{F94FAEE3-BAD2-4585-8B7B-AB474A2AE94A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.AOT", "Example\Example.AOT.csproj", "{F94FAEE3-BAD2-4585-8B7B-AB474A2AE94A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NApi.Template", "NApi.Template\NApi.Template.csproj", "{F5F65620-9E25-41A0-A320-0D8B5657C423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.CLR", "Example\Example.CLR.csproj", "{FD67725D-7DD1-4CA7-B615-3D684D3948E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NApi.Sdk.CLR", "NApi.Sdk.CLR\NApi.Sdk.CLR.csproj", "{929C21AC-5062-4522-B0E1-3128AE978074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "Benchmark\Benchmark.csproj", "{D7D29D99-731F-4DA3-8B01-1DE70BD54614}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +48,17 @@ Global
 		{F5F65620-9E25-41A0-A320-0D8B5657C423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5F65620-9E25-41A0-A320-0D8B5657C423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F65620-9E25-41A0-A320-0D8B5657C423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD67725D-7DD1-4CA7-B615-3D684D3948E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD67725D-7DD1-4CA7-B615-3D684D3948E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD67725D-7DD1-4CA7-B615-3D684D3948E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD67725D-7DD1-4CA7-B615-3D684D3948E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{929C21AC-5062-4522-B0E1-3128AE978074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{929C21AC-5062-4522-B0E1-3128AE978074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{929C21AC-5062-4522-B0E1-3128AE978074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{929C21AC-5062-4522-B0E1-3128AE978074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D29D99-731F-4DA3-8B01-1DE70BD54614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D29D99-731F-4DA3-8B01-1DE70BD54614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D29D99-731F-4DA3-8B01-1DE70BD54614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D29D99-731F-4DA3-8B01-1DE70BD54614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

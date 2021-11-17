@@ -7,8 +7,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <SelfContained>true</SelfContained>
-    <NativeLib>Shared</NativeLib>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,10 +18,6 @@
 
     <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">$(DefaultRuntimeIdentifier)</RuntimeIdentifier>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-alpha.1.21562.1"/>
-  </ItemGroup>
 
   <ItemGroup Condition="'$(IsNApiRepo)' != 'true'">
     <PackageReference Include="NApi" Version="$version$"/>

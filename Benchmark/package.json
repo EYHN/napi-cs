@@ -1,0 +1,12 @@
+{
+  "name": "benchmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "benchmark.js",
+  "private": "true",
+  "author": "eyhn",
+  "license": "MIT",
+  "devDependencies": {
+    "benny": "^3.7.1"
+  }
+}

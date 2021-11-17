@@ -1,6 +1,6 @@
 using System;
 
-namespace NApi.SourceGenerators.AOT
+namespace NApi.SourceGenerators
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
     sealed class ModuleExportsAttribute : Attribute

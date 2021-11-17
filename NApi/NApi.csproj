@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\Packaging.props" />
+	<Import Project="..\packaging.props" />
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>

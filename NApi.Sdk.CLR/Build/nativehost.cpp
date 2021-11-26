@@ -28,6 +28,7 @@
 
 #else
 #include <dlfcn.h>
+#include <limits.h>
 
 #define STR(s) s
 #define CH(c) c

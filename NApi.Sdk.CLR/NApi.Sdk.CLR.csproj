@@ -16,7 +16,7 @@
   </ItemGroup>
 
 	<Target Name="GenerateHeaders" BeforeTargets="BeforeBuild">
-    <Exec Command="npm i"
+    <Exec Command="npm i --unsafe-perm"
           WorkingDirectory="$(MSBuildThisFileDirectory)"
           ConsoleToMsBuild="true" />
 		<ItemGroup>

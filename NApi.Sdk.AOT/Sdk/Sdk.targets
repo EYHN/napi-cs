@@ -3,8 +3,8 @@
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   
-  <Target Name="CallPublish" AfterTargets="AfterBuild">
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish"/>
+  <Target Name="CallPublish" AfterTargets="AfterBuild" >
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish" Properties="NoBuild=true"/>
   </Target>
 
   <Target Name="NodeAddon" AfterTargets="LinkNative">

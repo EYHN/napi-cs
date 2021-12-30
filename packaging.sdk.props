@@ -1,0 +1,66 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)packaging.props"/>
+
+	<PropertyGroup Label="Build">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+	</PropertyGroup>
+
+	<UsingTask
+    TaskName="ReplaceText"
+    TaskFactory="RoslynCodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <SourceFiles ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <DestinationFiles ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <MatchExpression ParameterType="System.String" Required="true" />
+      <ReplacementText ParameterType="System.String" Required="true" />
+      <OutputFiles ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          OutputFiles = new TaskItem[SourceFiles.Length];
+          for (int i = 0; i < SourceFiles.Length; i++)
+          {
+              ITaskItem sourceFile = SourceFiles[i];
+              string sourceFileFullPath = sourceFile.GetMetadata("FullPath");
+              string outputFileFullPath = DestinationFiles[i].GetMetadata("FullPath");
+              Directory.CreateDirectory(Path.GetDirectoryName(outputFileFullPath));
+              File.WriteAllText(
+                  outputFileFullPath,
+                  Regex.Replace(File.ReadAllText(sourceFileFullPath), MatchExpression, ReplacementText));
+              OutputFiles[i] = new TaskItem(outputFileFullPath, new Dictionary<string, string>
+              {
+                  { "Pack", sourceFile.GetMetadata("Pack") },
+                  { "PackagePath", sourceFile.GetMetadata("PackagePath") },
+                  { "Visible", sourceFile.GetMetadata("Visible") },
+                  { "RelativeDir", sourceFile.GetMetadata("RelativeDir") },
+                  { "RecursiveDir", sourceFile.GetMetadata("RecursiveDir") },
+              });
+          }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="ApplyVersion" BeforeTargets="BeforeBuild">
+    <ReplaceText
+      SourceFiles="@(Content)"
+      DestinationFiles="@(Content->'$(IntermediateOutputPath)%(RelativeDir)%(Filename)%(Extension)')"
+      MatchExpression="\$version\$"
+      ReplacementText="$(PackageVersion)"
+    >
+      <Output TaskParameter="OutputFiles" ItemName="AppliedContent" />
+    </ReplaceText>
+
+    <ItemGroup>
+      <Content Remove="**\*" />
+      <Content Include="@(AppliedContent)" />
+    </ItemGroup>
+  </Target>
+</Project>

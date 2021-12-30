@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\Packaging.props"/>
+  <Import Project="..\packaging.props"/>
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <PropertyGroup Label="PackageInfo">
-		<Title>Source Generators for NApi.Sdk.AOT</Title>
+		<Title>Source Generators for NApi</Title>
 		<PackageType>SourceGenerators</PackageType>
 		<PackageTags>nodejs</PackageTags>
-		<Summary>Source Generators for NApi.Sdk.AOT</Summary>
-		<Description>Source Generators for NApi.Sdk.AOT</Description>
+		<Summary>Source Generators for NApi</Summary>
+		<Description>Source Generators for NApi</Description>
 	</PropertyGroup>
 
   <ItemGroup>

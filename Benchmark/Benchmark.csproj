@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.Build.Traversal/3.0.23">
+  <PropertyGroup>
+    <RunCommand>node</RunCommand>
+    <RunArguments>&quot;$(MSBuildThisFileDirectory)benchmark.js&quot; &quot;$(MSBuildThisFileDirectory)../Example/bin/aot/$(Configuration)/Example.AOT.js&quot; &quot;$(MSBuildThisFileDirectory)../Example/bin/clr/$(Configuration)/Example.CLR.js&quot;</RunArguments>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../Example/*.csproj" />
+  </ItemGroup>
+  <Target Name="NpmInstall" BeforeTargets="Restore;CollectPackageReferences">
+    <Exec Command="npm i"
+          WorkingDirectory="$(MSBuildThisFileDirectory)"
+          ConsoleToMsBuild="true" />
+  </Target>
+</Project>

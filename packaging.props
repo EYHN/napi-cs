@@ -5,6 +5,10 @@
 		<PackageProjectUrl>https://github.com/EYHN/napi-cs</PackageProjectUrl>
 		<PackageLicense>MIT</PackageLicense>
 		<PackageReleaseNotes>https://github.com/EYHN/napi-cs/blob/master/README.md</PackageReleaseNotes>
-		<PackageVersion>1.0.0-beta5</PackageVersion>
+		<PackageVersion>1.0.0-beta6</PackageVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Build">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 </Project>

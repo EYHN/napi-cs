@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace NApi.SourceGenerators.AOT
+namespace NApi.SourceGenerators
 {
     [Generator]
     public class ModuleExportsSourceGenerator : ISourceGenerator
@@ -25,11 +25,17 @@ namespace NApi
 {
     public class ModuleExports_AutoGen
     {
+        private static bool _initialized;
+
         [UnmanagedCallersOnly(EntryPoint = ""napi_register_module_v1"")]
         public static IntPtr napi_register_module_v1(IntPtr envPtr, IntPtr exportsPtr)
         {
-            NodeAddonHostApiProvider.SetupDllImportResolver(typeof(NApi).Assembly);
-            NApi.ApiProvider = new NodeAddonHostApiProvider();
+            if (!_initialized)
+            {
+                NodeAddonHostApiProvider.SetupDllImportResolver(typeof(NApi).Assembly);
+                NApi.ApiProvider = new NodeAddonHostApiProvider();
+                _initialized = true;
+            }
 
             using (var scope = JsScope.FromPointer(JsEnv.FromPointer(envPtr), null))
             {

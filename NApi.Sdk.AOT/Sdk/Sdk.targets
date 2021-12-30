@@ -3,12 +3,13 @@
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   
-  <Target Name="CallPublish" AfterTargets="AfterBuild">
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish"/>
+  <Target Name="CallPublish" AfterTargets="AfterBuild" >
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish" Properties="NoBuild=true"/>
   </Target>
 
   <Target Name="NodeAddon" AfterTargets="LinkNative">
     <Delete Files="$(NativeOutputPath)$(TargetName).node" />
+    <Message Text="$(NativeOutputPath)$(TargetName)$(NativeBinaryExt) -> $(NativeOutputPath)$(TargetName).node" Importance="high" />
     <Copy
       SourceFiles="$(NativeOutputPath)$(TargetName)$(NativeBinaryExt)"
       DestinationFiles="$(NativeOutputPath)$(TargetName).node"
@@ -21,6 +22,20 @@
       SourceFiles="$(PublishDir)\$(TargetName)$(NativeBinaryExt)"
       DestinationFiles="$(PublishDir)\$(TargetName).node"
     />
+  </Target>
+
+  <Target Name="BuildJsEntryPoint"
+          AfterTargets="PublishNodeAddon">
+    <PropertyGroup>
+        <JsEntryPoint>
+module.exports = require('./$([System.IO.Path]::GetRelativePath('$(OutputPath)', '$(NativeOutputPath)$(TargetName).node'))')
+        </JsEntryPoint>
+      </PropertyGroup>
+
+      <WriteLinesToFile
+        File="$(OutputPath)$(AssemblyName).js"
+        Overwrite="true"
+        Lines="$(JsEntryPoint)" />
   </Target>
 
 </Project>

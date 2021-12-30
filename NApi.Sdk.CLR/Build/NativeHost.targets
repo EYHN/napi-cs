@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <NativeBinDir>$([System.IO.Path]::Join($(MSBuildProjectDirectory), $(OutputPath)))</NativeBinDir>
+    <NativeOutputName>nativehost</NativeOutputName>
+
+    <NativePlatform>$([System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture)</NativePlatform>
+    <NativeObjDir>$([System.IO.Path]::Join($(MSBuildProjectDirectory), $(IntermediateOutputPath)))</NativeObjDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NativeSource Include="$(MSBuildThisFileDirectory)/nativehost.cpp" />
+    <Clean Include="$(NativeBinDir)/$(NativeOutputName).*" />
+    <Clean Include="$(NativeObjDir)/*.*" />
+  </ItemGroup>
+
+  <Target Name="PrepareForNativeBuild">
+    <PropertyGroup>
+      <NativeOutputExtension>.node</NativeOutputExtension>
+      <NativeOutputFilePath>$(NativeBinDir)/$(NativeOutputName)$(NativeOutputExtension)</NativeOutputFilePath>
+
+      <SourceFiles>@(NativeSource-> '&quot;%(RootDir)%(Directory)%(Filename)%(Extension)&quot;', ' ')</SourceFiles>
+
+      <NetHostDir>$(NetCoreTargetingPackRoot)/Microsoft.NETCore.App.Host.$(NETCoreSdkRuntimeIdentifier)/$(BundledNETCoreAppPackageVersion)/runtimes/$(NETCoreSdkRuntimeIdentifier)/native</NetHostDir>
+
+      <NetHostName Condition="$([MSBuild]::IsOsPlatform('Windows'))">nethost.dll</NetHostName>
+      <NetHostName Condition="$([MSBuild]::IsOsPlatform('Linux'))">libnethost.so</NetHostName>
+      <NetHostName Condition="$([MSBuild]::IsOsPlatform('OSX'))">libnethost.dylib</NetHostName>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(NativeBinDir)" />
+    <MakeDir Directories="$(NativeObjDir)" />
+  </Target>
+
+  <Target Name="BuildNativeProjectUnix"
+          AfterTargets="Build"
+          DependsOnTargets="PrepareForNativeBuild"
+          Condition="$([MSBuild]::IsOsPlatform('Linux')) OR $([MSBuild]::IsOsPlatform('OSX'))">
+    <PropertyGroup>
+      <IncPaths>-I$(MSBuildThisFileDirectory)inc -I$(MSBuildThisFileDirectory)inc/generated -I&quot;$(NetHostDir)&quot;</IncPaths>
+      <CompilerArgs>-shared</CompilerArgs>
+    </PropertyGroup>
+    <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+      <PreprocessorDefines>-D LINUX</PreprocessorDefines>
+      <LinkArgs>-ldl -lnethost -lpthread -L&quot;$(NetHostDir)&quot; -Wl,-rpath,'$ORIGIN',--disable-new-dtags,-undefined,dynamic_lookup -fPIC</LinkArgs>
+    </PropertyGroup>
+    <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
+      <PreprocessorDefines>-D OSX</PreprocessorDefines>
+      <LinkArgs>-ldl -lnethost -lpthread -L&quot;$(NetHostDir)&quot; -Wl,-rpath,'@loader_path',-undefined,dynamic_lookup</LinkArgs>
+    </PropertyGroup>
+
+    <Exec Command="g++ $(SourceFiles) $(IncPaths) $(PreprocessorDefines) -std=c++11 -o &quot;$(NativeOutputFilePath)&quot; $(CompilerArgs) $(LinkArgs)"
+          WorkingDirectory="$(NativeObjDir)"
+          ConsoleToMsBuild="true" />
+
+    <Copy SourceFiles="$(NetHostDir)/$(NetHostName)"
+          DestinationFolder="$(NativeBinDir)"
+          SkipUnchangedFiles="True" />
+  </Target>
+</Project>

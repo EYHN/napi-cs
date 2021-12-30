@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="BuildJsEntryPoint"
+          AfterTargets="Build">
+    <PropertyGroup>
+        <JsEntryPoint>
+const nativeHost = require('./nativehost.node')
+const path = require('path');
+
+module.exports = nativeHost.initialize(path.join(__dirname, "$(AssemblyName).dll"), path.join(__dirname, "$(AssemblyName).runtimeconfig.json"), "$(AssemblyName)");
+        </JsEntryPoint>
+      </PropertyGroup>
+
+      <WriteLinesToFile
+        File="$(OutputPath)$(AssemblyName).js"
+        Overwrite="true"
+        Lines="$(JsEntryPoint)" />
+  </Target>
+</Project>
